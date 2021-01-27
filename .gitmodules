@@ -1,0 +1,3 @@
+[submodule "awesome-heroes-rating-backend"]
+	path = awesome-heroes-rating-backend
+	url = https://github.com/eduardohurtado/awesome-heroes-rating-backend
