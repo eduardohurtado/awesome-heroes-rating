@@ -1,0 +1,20 @@
+.voteSection {
+  height: 250px;
+  width: 300px;
+  margin-top: 10px;
+  padding: 20px;
+  color: #eeeeee;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.opinionText {
+  color: #eeeeee;
+  font-size: 12px;
+}
+
+.buttonVote {
+  width: 90px;
+}

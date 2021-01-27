@@ -1,8 +1,12 @@
+* {
+  font-family: "Poppins";
+}
+
 html {
   height: 100%;
 
   body {
-    background-color: #071013;
+    // background-color: #071013;
     box-sizing: border-box;
     p,
     h1,
@@ -12,23 +16,19 @@ html {
     span,
     label,
     li {
-      font-family: "Akzidenz-Grotesk BQ";
       cursor: default;
     }
     input[type="text"],
     textarea {
-      font-family: "Akzidenz-Grotesk BQ";
       border: 1px solid #999;
       border-radius: 5px;
     }
     button {
-      font-family: "Akzidenz-Grotesk BQ";
       cursor: pointer;
       border-radius: 5px;
       border-style: none;
     }
     select {
-      font-family: "Akzidenz-Grotesk BQ";
       border-radius: 5px;
     }
   }

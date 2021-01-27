@@ -1,3 +1,4 @@
+// Dependencies
 import React from "react";
 import { HashRouter as Router, Route } from "react-router-dom";
 
@@ -9,9 +10,8 @@ import "./sass/normalize.scss";
 // import ReactNotification from "react-notifications-component";
 // import "react-notifications-component/dist/theme.css";
 
-const LOL = () => {
-  return <div>LOL</div>;
-};
+// Views
+import HomeLayout from "./views/home/components/HomeLayout/HomeLayout";
 
 const App: React.FC = () => {
   return (
@@ -20,7 +20,7 @@ const App: React.FC = () => {
         exact
         path="/"
         render={() => {
-          return <LOL />;
+          return <HomeLayout />;
         }}
       ></Route>
     </Router>
