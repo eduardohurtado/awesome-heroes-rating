@@ -11,7 +11,7 @@ import "./sass/normalize.scss";
 // import "react-notifications-component/dist/theme.css";
 
 // Views
-import HomeLayout from "./views/home/components/HomeLayout/HomeLayout";
+import HomeLayout from "./views/home/HomeLayout";
 
 const App: React.FC = () => {
   return (

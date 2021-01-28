@@ -1,0 +1,64 @@
+.heroeCard {
+  position: relative;
+  height: 300px;
+  width: 250px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.cardToBottom {
+  position: absolute;
+  display: flex;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+}
+.cardToBottomInfo {
+  color: #ffffff;
+  text-shadow: 1px 2px black;
+  padding: 10px;
+  position: absolute;
+  bottom: 30px;
+
+  h4 {
+    cursor: default;
+  }
+
+  p {
+    font-size: 9px;
+    text-shadow: 1px 1px black;
+    margin: 0;
+  }
+
+  a {
+    font-size: 12px;
+    cursor: pointer;
+  }
+}
+
+.cardPositiveVotes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 30vw;
+  color: #eeeeee;
+  text-shadow: 1px 2px black;
+  cursor: default;
+  backdrop-filter: blur(5px);
+  background-color: rgba(90, 164, 105, 0.4);
+}
+
+.cardNegativeVotes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 70vw;
+  color: #eeeeee;
+  text-shadow: 1px 2px black;
+  cursor: default;
+  backdrop-filter: blur(5px);
+  background-color: rgba(216, 52, 95, 0.4);
+}

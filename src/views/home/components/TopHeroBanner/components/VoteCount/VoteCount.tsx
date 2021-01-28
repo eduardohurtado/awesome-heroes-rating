@@ -10,13 +10,13 @@ import "./voteCount.scss";
 
 const VoteCount = (): JSX.Element => {
   return (
-    <div className="voteCount">
-      <div className="positiveVotes">
+    <div className="voteCountToBottom">
+      <div className="voteCountPositiveVotes">
         <FontAwesomeIcon icon={faThumbsUp} />
         &nbsp;30%
       </div>
 
-      <div className="negativeVotes">
+      <div className="voteCountNegativeVotes">
         <FontAwesomeIcon icon={faThumbsDown} />
         &nbsp;70%
       </div>

@@ -7,7 +7,7 @@ import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 import { faWikipediaW } from "@fortawesome/free-brands-svg-icons";
 
 // Styles
-import "./voteSection.scss";
+import "./scss/voteSection.scss";
 
 const VoteSection = (): JSX.Element => {
   return (
@@ -28,21 +28,6 @@ const VoteSection = (): JSX.Element => {
           Más información
         </a>
       </div>
-
-      {/* <div className="container-fluid mt-2 d-flex justify-content-around">
-        <button className="btn btn-success buttonVote ">
-          <FontAwesomeIcon
-            icon={faThumbsUp}
-            style={{ color: "#eeeeee", fontSize: 20 }}
-          />
-        </button>
-        <button className="btn btn-danger buttonVote">
-          <FontAwesomeIcon
-            icon={faThumbsDown}
-            style={{ color: "#eeeeee", fontSize: 20 }}
-          />
-        </button>
-      </div> */}
 
       <div className="toBottom">
         <div className="buttonVoteUp">

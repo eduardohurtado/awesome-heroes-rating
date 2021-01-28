@@ -1,4 +1,4 @@
-.voteCount {
+.voteCountToBottom {
   position: absolute;
   display: flex;
   bottom: 0;
@@ -6,7 +6,7 @@
   height: 40px;
 }
 
-.positiveVotes {
+.voteCountPositiveVotes {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,7 +18,7 @@
   background-color: rgba(90, 164, 105, 0.4);
 }
 
-.negativeVotes {
+.voteCountNegativeVotes {
   display: flex;
   align-items: center;
   justify-content: center;

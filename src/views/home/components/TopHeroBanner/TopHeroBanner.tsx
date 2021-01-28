@@ -7,7 +7,7 @@ import VoteSection from "./components/VoteSection/VoteSection";
 import VoteCount from "./components/VoteCount/VoteCount";
 
 // Styles
-import "./topHeroBanner.scss";
+import "./scss/topHeroBanner.scss";
 
 const TopHeroBanner = (): JSX.Element => {
   return (
