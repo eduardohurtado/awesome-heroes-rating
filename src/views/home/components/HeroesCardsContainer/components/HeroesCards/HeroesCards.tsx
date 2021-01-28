@@ -40,13 +40,14 @@ interface IHero {
 
 const HeroesCards = (): JSX.Element => {
   const [heroInfo, setHeroInfo] = useState<IHero[]>();
+  const [loading, setLoading] = useState(true);
 
   // GraphQL fetch data
   const { error, data } = useQuery<IHeroes>(GET_HEROE);
 
   useEffect(() => {
     if (data) {
-      console.log("Data from mongo db:", data);
+      setLoading(false);
 
       setHeroInfo(data.heroes);
     }
@@ -58,9 +59,36 @@ const HeroesCards = (): JSX.Element => {
     }
   }, [error]);
 
+  const getRatingPercentages = (
+    positiveVotes: number,
+    negativeVotes: number
+  ) => {
+    if (positiveVotes + negativeVotes !== 0) {
+      const positivePercentage =
+        (positiveVotes * 100) / (positiveVotes + negativeVotes);
+      const negativePercentage =
+        (negativeVotes * 100) / (positiveVotes + negativeVotes);
+
+      return {
+        positive: Math.round(positivePercentage),
+        negative: Math.round(negativePercentage)
+      };
+    } else {
+      return {
+        positive: 50,
+        negative: 50
+      };
+    }
+  };
+
   const Card = heroInfo?.map((item, index) => {
+    const ratingPercentages = getRatingPercentages(
+      item.votesPositive,
+      item.votesNegative
+    );
+
     return (
-      <div className="col-sm mt-3 d-flex justify-content-center" key={index}>
+      <div className="col mt-3 d-flex justify-content-center" key={index}>
         <div
           className="card heroeCard"
           style={{ backgroundImage: `url(${item.heroPhotoURL})` }}
@@ -75,14 +103,21 @@ const HeroesCards = (): JSX.Element => {
                 Más información
               </a>
             </div>
-            <div className="cardPositiveVotes">
+
+            <div
+              className="cardPositiveVotes"
+              style={{ width: `${ratingPercentages.positive}%` }}
+            >
               <FontAwesomeIcon icon={faThumbsUp} />
-              &nbsp;30%
+              &nbsp;{ratingPercentages.positive}%
             </div>
 
-            <div className="cardNegativeVotes">
+            <div
+              className="cardNegativeVotes"
+              style={{ width: `${ratingPercentages.negative}%` }}
+            >
               <FontAwesomeIcon icon={faThumbsDown} />
-              &nbsp;70%
+              &nbsp;{ratingPercentages.negative}%
             </div>
           </div>
         </div>
@@ -90,7 +125,15 @@ const HeroesCards = (): JSX.Element => {
     );
   });
 
-  return <div className="row">{Card}</div>;
+  return (
+    <div className="row">
+      {loading && (
+        <div className="loadingCards">Cargando lista de Heroes...</div>
+      )}
+
+      {Card}
+    </div>
+  );
 };
 
 export default HeroesCards;
