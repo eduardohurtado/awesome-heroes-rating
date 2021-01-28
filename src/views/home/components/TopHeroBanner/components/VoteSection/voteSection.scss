@@ -1,8 +1,9 @@
 .voteSection {
+  position: relative;
   height: 250px;
   width: 300px;
   margin-top: 10px;
-  padding: 20px;
+  // padding: 20px;
   color: #eeeeee;
   backdrop-filter: blur(5px);
   background-color: rgba(0, 0, 0, 0.3);
@@ -10,11 +11,37 @@
   overflow: hidden;
 }
 
+.mainContent {
+  padding: 20px;
+}
+
+.toBottom {
+  position: absolute;
+  display: flex;
+  bottom: 0;
+  width: 100%;
+  height: min-content;
+}
+
 .opinionText {
   color: #eeeeee;
   font-size: 12px;
 }
 
-.buttonVote {
-  width: 90px;
+.buttonVoteUp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 150px;
+  background: #5aa469;
+}
+
+.buttonVoteDown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 150px;
+  background: #d8345f;
 }

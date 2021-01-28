@@ -1,0 +1,31 @@
+.voteCount {
+  position: absolute;
+  display: flex;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+}
+
+.positiveVotes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 30vw;
+  color: #eeeeee;
+  text-shadow: 1px 2px black;
+  backdrop-filter: blur(5px);
+  background-color: rgba(90, 164, 105, 0.4);
+}
+
+.negativeVotes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 70vw;
+  color: #eeeeee;
+  text-shadow: 1px 2px black;
+  backdrop-filter: blur(5px);
+  background-color: rgba(216, 52, 95, 0.4);
+}
