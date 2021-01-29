@@ -6,7 +6,11 @@ import { connect } from "react-redux";
 
 // Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
+import {
+  faThumbsUp,
+  faThumbsDown,
+  faChevronLeft
+} from "@fortawesome/free-solid-svg-icons";
 import { faWikipediaW } from "@fortawesome/free-brands-svg-icons";
 
 // Styles
@@ -38,6 +42,8 @@ interface IHero {
 
 const VoteSection = (props: IProps): JSX.Element => {
   const [heroToVote, setHeroToVote] = useState<IHero>();
+  const [voted, setVoted] = useState(false);
+  const [votedPositive, setVotedPositive] = useState(true);
 
   useEffect(() => {
     if (props.state?.isSelectingHero && props.state.heroeSelected) {
@@ -54,6 +60,9 @@ const VoteSection = (props: IProps): JSX.Element => {
       if (option) {
         props.evaluateHeroUpAsync();
       }
+
+      setVoted(true);
+      setVotedPositive(true);
     }
   };
 
@@ -66,6 +75,9 @@ const VoteSection = (props: IProps): JSX.Element => {
       if (option) {
         props.evaluateHeroDownAsync();
       }
+
+      setVoted(true);
+      setVotedPositive(false);
     }
   };
 
@@ -76,53 +88,117 @@ const VoteSection = (props: IProps): JSX.Element => {
 
         {heroToVote?.name ? <h3>{heroToVote.name}?</h3> : <h3>Un Heroe</h3>}
 
-        {heroToVote?.description ? (
-          <p className="opinionText">{heroToVote.description}</p>
-        ) : (
-          <p className="opinionText">
-            Por favor selecciona un heroe de la lista inferior para poder darnos
-            tu feedback, muchas grácias :)
-          </p>
-        )}
+        {/* View when the user has no voted yet */}
+        {!voted &&
+          (heroToVote?.description ? (
+            <div>
+              <p className="opinionText">{heroToVote.description}</p>
+              <a
+                href={heroToVote.moreInfoURL}
+                target="_blank"
+                rel="noreferrer"
+                style={{ fontSize: 13 }}
+              >
+                <FontAwesomeIcon icon={faWikipediaW} />
+                Más información
+              </a>
+            </div>
+          ) : (
+            <p className="opinionText">
+              Por favor selecciona un heroe de la lista inferior para poder
+              darnos tu feedback, muchas grácias :)
+            </p>
+          ))}
 
-        {props.state?.isSelectingHero && (
-          <a href="#" style={{ fontSize: 12 }}>
-            <FontAwesomeIcon icon={faWikipediaW} />
-            Más información
-          </a>
+        {/* View when the user just voted */}
+        {voted && (
+          <>
+            <div className="row" style={{ padding: 20 }}>
+              {/* Voted positive */}
+              {votedPositive && (
+                <>
+                  <div className="col-sm-auto votedStylePositive">
+                    <FontAwesomeIcon
+                      icon={faThumbsUp}
+                      style={{
+                        color: "#eeeeee",
+                        fontSize: 20
+                      }}
+                    />
+                  </div>
+                </>
+              )}
+
+              {/* Voted negative */}
+              {!votedPositive && (
+                <>
+                  <div className="col-sm-auto votedStyleNegative">
+                    <FontAwesomeIcon
+                      icon={faThumbsDown}
+                      style={{
+                        color: "#eeeeee",
+                        fontSize: 20
+                      }}
+                    />
+                  </div>
+                </>
+              )}
+
+              <div className="col" style={{ fontSize: 20 }}>
+                Tu voto ha sido registrado!
+              </div>
+            </div>
+            <span>Para regresar por favor presiona el boton inferior</span>
+          </>
         )}
       </div>
 
       <div className="toBottom">
-        <div
-          className="buttonVoteUp"
-          onClick={() => {
-            confirmVoteUp();
-          }}
-        >
-          <FontAwesomeIcon
-            icon={faThumbsUp}
-            style={{
-              color: "#eeeeee",
-              fontSize: 20
+        {voted && (
+          <button
+            className="goBackToVoteButton"
+            onClick={() => {
+              setVoted(false);
             }}
-          />
-        </div>
+          >
+            <FontAwesomeIcon icon={faChevronLeft} />
+            <FontAwesomeIcon icon={faChevronLeft} /> Regresar
+          </button>
+        )}
 
-        <div
-          className="buttonVoteDown"
-          onClick={() => {
-            confirmVoteDown();
-          }}
-        >
-          <FontAwesomeIcon
-            icon={faThumbsDown}
-            style={{
-              color: "#eeeeee",
-              fontSize: 20
-            }}
-          />
-        </div>
+        {!voted && (
+          <>
+            <div
+              className="buttonVoteUp"
+              onClick={() => {
+                confirmVoteUp();
+              }}
+            >
+              <FontAwesomeIcon
+                icon={faThumbsUp}
+                style={{
+                  color: "#eeeeee",
+                  fontSize: 20
+                }}
+              />
+            </div>
+
+            <div
+              className="buttonVoteDown"
+              onClick={() => {
+                confirmVoteDown();
+              }}
+            >
+              <FontAwesomeIcon
+                icon={faThumbsDown}
+                style={{
+                  color: "#eeeeee",
+                  fontSize: 20
+                }}
+              />
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

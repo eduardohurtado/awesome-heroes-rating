@@ -1,6 +1,8 @@
 # Awesome Heroes Rating
 
-Description...
+Welcome to my page, this page is very useful to provide your qualifying opinion about the most popular superheroes, do not hesitate to make use of it, enjoy it.
+
+This is a full stack application divided in three layers, where: frontend was made with React and global state provided by Redux, API business layer with GraphQL, and finally the database was made with MongoDB
 
 ## App requirements
 

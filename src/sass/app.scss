@@ -8,6 +8,8 @@ html {
   body {
     background-color: whitesmoke;
     box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
     p,
     h1,
     h2,
