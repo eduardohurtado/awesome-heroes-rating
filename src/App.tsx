@@ -12,10 +12,6 @@ import { gql, useQuery } from "@apollo/client";
 import "./sass/app.scss";
 import "./sass/normalize.scss";
 
-// Notification component
-// import ReactNotification from "react-notifications-component";
-// import "react-notifications-component/dist/theme.css";
-
 // Views
 import HomeLayout from "./views/home/HomeLayout";
 
@@ -23,11 +19,13 @@ import HomeLayout from "./views/home/HomeLayout";
 const GET_HEROE = gql`
   query {
     heroes {
+      _id
       name
       description
       votesPositive
       votesNegative
       heroPhotoURL
+      heroBannerURL
       moreInfoURL
     }
   }

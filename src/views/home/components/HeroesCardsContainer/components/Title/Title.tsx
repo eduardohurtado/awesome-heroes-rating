@@ -17,7 +17,7 @@ const Title = (): JSX.Element => {
         <div className="alert alert-secondary row" role="alert">
           <div className="col-md-auto">
             <h3>
-              <b>Uso:</b>
+              <b>Bienvenido:</b>
             </h3>
           </div>
 

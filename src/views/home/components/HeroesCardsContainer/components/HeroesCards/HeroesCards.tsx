@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Dispatch } from "react";
 
 //Global state REDUX
 import { connect } from "react-redux";
@@ -12,17 +12,20 @@ import { faWikipediaW } from "@fortawesome/free-brands-svg-icons";
 // Styles
 import "./scss/heroesCards.scss";
 
+// Interfaces
 interface IProps {
   state: {
     heroesInfo: IHero[] | [];
     isLoading: boolean;
   };
+  setHeroSelected(heroID: string): void;
 }
 interface IReduxState {
   heroesInfo: IHero[] | [];
   isLoading: boolean;
 }
 interface IHero {
+  _id: string;
   name: string;
   description: string;
   votesPositive: number;
@@ -62,6 +65,12 @@ const HeroesCards = (props: IProps): JSX.Element => {
     }
   };
 
+  // When the user clicks on the button, scroll to the top of the document
+  const topFunction = () => {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  };
+
   const Card = heroInfo?.map((item, index) => {
     const ratingPercentages = getRatingPercentages(
       item.votesPositive,
@@ -73,6 +82,10 @@ const HeroesCards = (props: IProps): JSX.Element => {
         <div
           className="card heroeCard"
           style={{ backgroundImage: `url(${item.heroPhotoURL})` }}
+          onClick={() => {
+            props.setHeroSelected(item._id);
+            topFunction();
+          }}
         >
           <div className="cardToBottom">
             <div className="cardToBottomInfo">
@@ -125,4 +138,15 @@ const mapStateToProps = (state: IReduxState) => {
   }; //define mapStateToProps.
 };
 
-export default connect(mapStateToProps, null)(HeroesCards);
+const mapDispatchToProps = (
+  dispatch: Dispatch<{ type: string; heroID: string }>
+) => ({
+  setHeroSelected(heroID: string) {
+    dispatch({
+      type: "SET_HERO_SELECTED",
+      heroID
+    });
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeroesCards);
