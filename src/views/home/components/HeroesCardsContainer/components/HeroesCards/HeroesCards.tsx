@@ -1,33 +1,26 @@
 // Dependencies
 import React, { useState, useEffect } from "react";
 
-// GraphQL
-import { gql, useQuery } from "@apollo/client";
+//Global state REDUX
+import { connect } from "react-redux";
 
 // Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
+import { faWikipediaW } from "@fortawesome/free-brands-svg-icons";
 
 // Styles
 import "./scss/heroesCards.scss";
 
-// Queries/Mutations/Subscriptions
-const GET_HEROE = gql`
-  query {
-    heroes {
-      name
-      description
-      votesPositive
-      votesNegative
-      heroPhotoURL
-      moreInfoURL
-    }
-  }
-`;
-
-// Interfaces
-interface IHeroes {
-  heroes: IHero[];
+interface IProps {
+  state: {
+    heroesInfo: IHero[] | [];
+    isLoading: boolean;
+  };
+}
+interface IReduxState {
+  heroesInfo: IHero[] | [];
+  isLoading: boolean;
 }
 interface IHero {
   name: string;
@@ -38,26 +31,14 @@ interface IHero {
   moreInfoURL: string;
 }
 
-const HeroesCards = (): JSX.Element => {
+const HeroesCards = (props: IProps): JSX.Element => {
   const [heroInfo, setHeroInfo] = useState<IHero[]>();
-  const [loading, setLoading] = useState(true);
-
-  // GraphQL fetch data
-  const { error, data } = useQuery<IHeroes>(GET_HEROE);
 
   useEffect(() => {
-    if (data) {
-      setLoading(false);
-
-      setHeroInfo(data.heroes);
+    if (props.state.heroesInfo.length > 0) {
+      setHeroInfo(props.state.heroesInfo);
     }
-  }, [data]);
-
-  useEffect(() => {
-    if (error) {
-      console.error("GET MongoDB Hero information ERROR:", error.message);
-    }
-  }, [error]);
+  }, [props.state.heroesInfo]);
 
   const getRatingPercentages = (
     positiveVotes: number,
@@ -100,6 +81,7 @@ const HeroesCards = (): JSX.Element => {
               <p>{item.description}</p>
 
               <a href={item.moreInfoURL} target="_blank" rel="noreferrer">
+                <FontAwesomeIcon icon={faWikipediaW} />
                 Más información
               </a>
             </div>
@@ -127,7 +109,7 @@ const HeroesCards = (): JSX.Element => {
 
   return (
     <div className="row">
-      {loading && (
+      {props.state.isLoading && (
         <div className="loadingCards">Cargando lista de Heroes...</div>
       )}
 
@@ -136,4 +118,11 @@ const HeroesCards = (): JSX.Element => {
   );
 };
 
-export default HeroesCards;
+const mapStateToProps = (state: IReduxState) => {
+  return {
+    //Passing the current state of "store.ts" because
+    state //mapDispatchToProps don't work without
+  }; //define mapStateToProps.
+};
+
+export default connect(mapStateToProps, null)(HeroesCards);

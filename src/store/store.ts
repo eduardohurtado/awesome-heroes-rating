@@ -1,60 +1,35 @@
-interface IAppStateMongo {
-  articles: {
-    _id: string;
-    name: string;
-    lastName: string;
-    gender: string;
-    title: string;
-    description: string;
-  }[];
-  isLoading?: boolean;
-  isSelecting?: boolean;
+// Interfaces
+interface IReduxState {
+  heroesInfo: IHero[] | [];
+  isLoading: boolean;
 }
-
 interface IAction {
   type: string;
-  payload: {
-    _id: string;
-    name: string;
-    lastName: string;
-    gender: string;
-    title: string;
-    description: string;
-    isSelecting: boolean;
-  };
+  payload: IHero[];
+}
+interface IHero {
+  _id: string;
+  name: string;
+  description: string;
+  votesPositive: number;
+  votesNegative: number;
+  heroPhotoURL: string;
+  moreInfoURL: string;
 }
 
-const initialStateMongo: IAppStateMongo = {
-  articles: [],
-  isLoading: true,
-  isSelecting: false,
+// APP state
+const reduxState: IReduxState = {
+  heroesInfo: [],
+  isLoading: true
 };
 
-const reducer = (
-  state = initialStateMongo,
-  action: IAction
-): IAppStateMongo => {
-  if (action.type === "ADD_ARTICLE") {
-    const actualState = state.articles;
-    actualState.push(action.payload);
-
+const reducer = (state = reduxState, action: IAction): IReduxState => {
+  if (action.type === "SAVE_HEROES_DATA") {
     return {
       ...state,
-      articles: [...actualState],
-      isLoading: false,
+      heroesInfo: action.payload,
+      isLoading: false
     };
-  } else if (action.type === "TABLE_SELECTING") {
-    if (action.payload.isSelecting) {
-      return {
-        ...state,
-        isSelecting: true,
-      };
-    } else {
-      return {
-        ...state,
-        isSelecting: false,
-      };
-    }
   }
 
   return state;
